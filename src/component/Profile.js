@@ -4,8 +4,6 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import { connect } from 'react-redux';
 import CartActions from './redux/cart'
 
-
-
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -15,99 +13,95 @@ class Profile extends Component {
   render() {
     const { item } = this.props
     const { title, poster, description, posters = [], posterV = [], Voucher = [] } = item
+    const Divider = (props) => {
+      return <View {...props}>
+        <View style={styles.line}></View>
+        <Text style={styles.textOr}> OR </Text>
+        <View style={styles.line}></View>
+      </View>
+    }
     return (
-      <View >
-         <View style={{ flex: 1 }}>
-          <ScrollView horizontal={true}>
-            {posters.map(word => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate('Detail', { item: word })
-                  }}
-                  activeOpacity={0.4}
-                  style={styles.container}>
-                  <View style={{
-                    marginTop: 10,
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center', marginHorizontal: 5,
-                    marginBottom: 10
-                  }}>
-                    <Text style={{ color: 'red', fontSize: 20 }}>{title.s}</Text>
-                  </View>
-                  <Image
-                    source={{ uri: word.s }}
-                    style={styles.image} />
-                  <View style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
-                    <Text style={{ color: '#AEB404', fontSize: 20, fontWeight: 'bold' }}> Gia Vip </Text>
-                    <Text style={{ color: 'blue', fontSize: 15 }}> {description.s}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            })}
-          </ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          scrollEventThrottle={16}>
+          <View style={{ flex: 1, paddingTop: 20 }}>
+            <Text style={styles.textscv}> What can we help you find ? </Text>
+          </View>
+          <View style={styles.viewImage}>
+            <ScrollView horizontal={true}>
+              {posters.map(word => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.props.navigation.navigate('Detail', { item: word })
+                    }}>
+                    <View style={styles.Image}>
+                      <Image
+                        source={{ uri: word.s }}
+                        style={styles.image}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                )
+              })}
+            </ScrollView>
+          </View>
+          <View style={{ flex: 1, marginTop: 5 }}>
+            <Text style={styles.textTitle}> Gia Vip</Text>
+          </View>
+        </ScrollView>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.viewImage}>
           <ScrollView horizontal={true}>
             {posterV.map(word => {
               return (
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate('Detail', { item: word })
-                  }}
-                  activeOpacity={0.4}
-                  style={styles.container}>
-                  <View style={{
-                    marginTop: 10,
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center', marginHorizontal: 5,
-                    marginBottom: 10
                   }}>
-                    <Text style={{ color: 'red', fontSize: 20 }}>{title.s}</Text>
-                  </View>
-                  <Image
-                    source={{ uri: word.s }}
-                    style={styles.image} />
-                  <View style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
-                    <Text style={{ color: '#AEB404', fontSize: 20, fontWeight: 'bold' }}> Gia Thuong </Text>
-                    <Text style={{ color: 'blue', fontSize: 15 }}> {description.s}</Text>
+                  <View style={styles.Image}>
+                    <Image
+                      source={{ uri: word.s }}
+                      style={styles.image}
+                    />
                   </View>
                 </TouchableOpacity>
               )
             })}
           </ScrollView>
+        </View>
+        <View style={{ flex: 1, marginTop: 20 }}>
+          <Text style={styles.textTitle}> Gia Thuong</Text>
+        </View>
+        <View style={styles.viewImage}>
           <ScrollView horizontal={true}>
             {Voucher.map(word => {
               return (
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate('Voucher', { item: word })
-                  }}
-                  activeOpacity={0.4}
-                  style={styles.container}>
-                  <View style={{
-                    marginTop: 10,
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center', marginHorizontal: 5,
-                    marginBottom: 10
                   }}>
-                  </View>
-                  <Image
-                    source={{ uri: word.s }}
-                    style={styles.imageVoucher} />
-                  <View style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
-                    <Text style={{ color: '#AEB404', fontSize: 20, fontWeight: 'bold' }}> Voucher </Text>
+                  <View style={styles.Image}>
+                    <Image
+                      source={{ uri: word.s }}
+                      style={styles.image}
+                    />
                   </View>
                 </TouchableOpacity>
               )
             })}
           </ScrollView>
-      </View>
+        </View>
+        <View style={{ flex: 1, marginTop: 20 }}>
+          <Text style={styles.textTitle}> Voucher </Text>
+        </View>
       </View>
     );
   }
 }
 const { height, width } = Dimensions.get('screen')
-const heightImage = Math.round(width / 1.2)
-const widthImage = Math.round(width / 1.2)
+const heightImage = Math.round(width / 2)
+const widthImage = Math.round(width / 2)
 
 const mapStateToProps = (state) => {
   return ({
@@ -123,17 +117,7 @@ const mapDispatchToProps = (dispatch) => { //eslint-disable-line
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 const styles = StyleSheet.create({
-  textOpa: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    backgroundColor: '#DCDCDC',
-  },
-  texttt: {
-    fontSize: 18,
-    color: 'red',
-    marginTop: 5,
-    alignContent: 'center'
-  },
+
   image: {
     width: widthImage,
     height: heightImage,
@@ -142,22 +126,63 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginHorizontal: 10
   },
-  textcc: {
-    color: 'blue',
-    fontSize: 20
+  textscv: {
+    fontSize: 24, fontWeight: '500',
+    paddingHorizontal: 20,
+    shadowOpacity: 0.5,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 3, height: 6
+    }
   },
-  container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    backgroundColor: '#DCDCDC',
-    marginHorizontal: 10
-  },
-  imageVoucher: {
-    width: 300,
-    height: 150,
+  viewImage: {
+    marginLeft: 20,
     borderWidth: 0.5,
-    borderRadius: 10
+    borderColor: '#dddddd',
+    marginTop: 20,
+    width: null,
+    height: 300,
+    shadowOpacity: 0.5,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 3, height: 6,
+    },
+    flexDirection: 'row', justifyContent: 'center'
+  },
+  viewTextTitle: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingTop: 20
+  },
+  textTitle: {
+    fontSize: 18, textAlign: 'center',
+    color: 'rgb(234,97,97)'
+  },
+  line: {
+    height: 1,
+    flex: 2,
+    backgroundColor: 'black'
+  },
+  divider: {
+    flexDirection: 'row',
+    width: 280,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 80
 
+  },
+  Image: {
+    marginTop: 20,
+    backgroundColor: 'white',
+    height: 250,
+    shadowOffset: {
+      width: 5, height: 10
+    },
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    borderRadius: 6,
+    margin: 10,
   }
 
 })

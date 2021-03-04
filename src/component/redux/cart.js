@@ -51,7 +51,7 @@ const filterMode = (state, { filter }) => {
         ...state, products: productsInit.filter(c => {
             if (all) return true
             if (Vip) return c.type=== 'Vip'
-            if (Thuong) return c.type === 'Gia Thuong'
+            if (Thuong) return c.type === 'Thuong'
         })
     }
 }

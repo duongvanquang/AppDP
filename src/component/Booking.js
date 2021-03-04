@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 
@@ -11,11 +11,16 @@ class Booking extends Component {
   }
   renderProduct = ({ item }) => {
     return (
-        <View style={{ borderBottomWidth: 1, paddingVertical: 10, paddingHorizontal: 16 }}>
-          <Text style={{ color: 'red', fontSize: 17, fontWeight: 'bold' }}>Danh sách những phòng đã chọn </Text>
-          <Text style={{ color: 'green', fontSize: 15, marginTop: 5 }}>Những phòng cần thanh toán : {item.map(i => i.title.s).join(', ')}</Text>
-        </View>)
-      
+      <View style={styles.container}>
+        <View style={styles.containerText}>
+          <Text style={styles.textTitle}>Những phòng cần thanh toán</Text>
+        </View>
+        <View style = {styles.ViewTitle}>
+          <Text style = {styles.textKK}>{item.map(i => i.title.s). join(',')}</Text>
+        </View>
+      </View>
+    )
+
   }
   render() {
     return (
@@ -33,7 +38,7 @@ class Booking extends Component {
 }
 const mapStateToProps = (state) => {
   return ({
-   thongbaos: state?.cart?.thongbaos
+    thongbaos: state?.cart?.thongbaos
   });
 };
 const mapDispatchToProps = (dispatch) => {
@@ -42,3 +47,47 @@ const mapDispatchToProps = (dispatch) => {
   });
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Booking)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, flexDirection: 'column',
+    justifyContent: 'center', alignItems: 'center'
+  },
+  containerText: {
+    backgroundColor: 'white', width: 300,
+    height: 60, justifyContent: 'center',
+    alignItems: 'center', borderRadius: 10, marginTop: 20, shadowOffset: {
+      width: 5, height: 10
+    },
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+  },
+  textTitle: {
+    fontSize: 19, textAlign: 'center', color: 'blue',
+    shadowOffset: {
+      width: 5, height: 10
+    },
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+  },
+  ViewTitle:{
+    marginTop:20,backgroundColor:'white',width: 300,
+    height: 100, justifyContent: 'center',
+    alignItems: 'center', borderRadius: 10, marginTop: 20, shadowOffset: {
+      width: 5, height: 10},
+      shadowColor: 'black',
+    shadowOpacity: 0.5,
+    
+  },
+    textKK:
+    {
+      fontSize: 19, textAlign: 'center', color: 'red',
+    shadowOffset: {
+      width: 5, height: 10
+    },
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    }
+  
+})
+

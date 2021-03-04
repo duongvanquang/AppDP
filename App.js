@@ -9,7 +9,6 @@ import { combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Booking from './src/component/Booking';
 import Home from './src/component/Home';
-import Login from './src/component/Login';
 import Settings from './src/component/Settings';
 import Detail from './src/component/Detail';
 import Filter from './src/component/Filter';
@@ -18,6 +17,7 @@ import Danhsach from './src/component/Danhsach';
 import Price from './src/component/Price';
 import Voucher from './src/component/Voucher';
 import Signup from './src/component/Signup';
+import Login from './src/component/Login';
 
 
 const LightboxView = ({ navigator }) => (
@@ -87,11 +87,11 @@ class StackApp extends Component {
           <Stack.Screen name="Filter" component={Filter} />
           <Stack.Screen name="Trang chủ" component={Mytab} />
           <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="renderScene"  component={renderScene} />
+          <Stack.Screen name="renderScene" component={renderScene} />
           <Stack.Screen name="Thông Tin Chi Tiết" component={Danhsach} />
-          <Stack.Screen name="Price"  component={Price} />
-          <Stack.Screen name="Voucher"  component={Voucher} />
-          <Stack.Screen name="ĐĂNG KÝ"  component={Signup} />
+          <Stack.Screen name="Price" component={Price} />
+          <Stack.Screen name="Voucher" component={Voucher} />
+          <Stack.Screen name="Đăng ký" component={Signup} />
         </Stack.Navigator>
       </NavigationContainer>
     );
